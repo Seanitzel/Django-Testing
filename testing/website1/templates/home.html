@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+ {% block test %}
+<h1>Home</h1>
+
+<p>This is the home page.</p>
+
+<ul>
+{% for var in num_list %}
+<li style="background-color: blue"> >Random-Number: {{var}}</li>
+{% endfor %}
+</ul>
+ {% endblock test %}}
