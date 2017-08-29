@@ -5,7 +5,7 @@
 <h1>Weight List</h1>
 <ul>
 {% for w in object_list %}
-<li>Date: {{w.date}}--------Weight: {{ w.weight }}--------Gym: {{w.gym}}</li>
+<li>Name: {{w.name}} | Date: {{w.date}} | Weight: {{ w.weight }} | Gym: {{w.gym}}</li>
 {% endfor %}
 </ul>
 {% endblock %}

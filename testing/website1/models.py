@@ -5,8 +5,9 @@ from django.utils import timezone
 
 # Create your models here.
 class Weight(models.Model):
+	name = models.CharField(max_length = 120, null = True)
 	gym = models.BooleanField(default = False)
 	date = models.DateTimeField(auto_now = False, auto_now_add = False, null = True)
 	weight = models.FloatField(max_length = 5, null = True)
 	def __str__(self):
-		return self.date
+		return self.name
