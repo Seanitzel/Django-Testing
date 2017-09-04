@@ -1,7 +1,7 @@
 from django.conf.urls import url
 from django.contrib import admin
 
-from website1.views import home, about, contact
+from Website1.views import home, about, contact
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
