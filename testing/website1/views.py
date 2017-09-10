@@ -30,14 +30,8 @@ class WeightListView(ListView):
 
 class WeightDetailView(DetailView):
 	queryset = Weight.objects.all()
-	
-	def get_context_data(self, *args, **kwargs):	#this is just for pk
-		print(self, kwargs)
-		context = super(WeightDetailView, self).get_context_data(*args, **kwargs)
-		print(context)
-		return context
 
-	def get_object(self, *args, **kwargs):
-		per_id = self.kwargs.get('per_id')
-		obj = get_object_or_404(Weight, id = per_id) # pk = per_id
-		return obj
+	# def get_object(self, *args, **kwargs):
+	# 	per_id = self.kwargs.get('per_id')
+	# 	obj = get_object_or_404(Weight, id = per_id) # pk = per_id
+	# 	return obj
