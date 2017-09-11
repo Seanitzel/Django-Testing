@@ -5,7 +5,21 @@ from django.db.models import Q
 from django.views.generic import TemplateView,ListView,DetailView
 
 from .models import Weight
+from .form import WeightCreateForm
 import random
+
+def Weight_createview(request):
+	if request.method == "POST":
+		print(request.POST)
+		name = request.POST.get("Name")
+		weight = request.POST.get("Weight")
+		obj = Weight.objects.create(
+			name = name,
+			weight = weight
+			)
+	template_name = 'website1/form.html'
+	context = {}
+	return render(request, template_name, context)
 
 def Weights(request):
 	template_name = 'weight_list.html'
@@ -30,8 +44,3 @@ class WeightListView(ListView):
 
 class WeightDetailView(DetailView):
 	queryset = Weight.objects.all()
-
-	# def get_object(self, *args, **kwargs):
-	# 	per_id = self.kwargs.get('per_id')
-	# 	obj = get_object_or_404(Weight, id = per_id) # pk = per_id
-	# 	return obj
