@@ -2,28 +2,25 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
 from django.views import View
 from django.db.models import Q
-from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic import TemplateView,ListView,DetailView, CreateView
 
 from .models import Weight
-from .form import WeightCreateForm
+from .form import WeightCreateForm,WeightForm
 import random
 
-def Weight_createview(request):
-	form = WeightCreateForm(request.POST or None)
-	errors = None
-	if form.is_valid():
-		obj = Weight.objects.create(
-			name = form.cleaned_data.get('name'),
-			weight = form.cleaned_data.get('weight')
-			)
-		return HttpResponseRedirect("/weight/")
+# def Weight_createview(request):		WE DONT NEED THIS ANYMORE
+# 	form = WeightForm(request.POST or None)
+# 	errors = None
+# 	if form.is_valid():
+# 		form.save()
+# 		return HttpResponseRedirect("/weight/")
 
-	if form.errors:
-		errors = form.errors
+# 	if form.errors:
+# 		errors = form.errors
 
-	template_name = 'website1/form.html'
-	context = {"form": form, "errors": errors}
-	return render(request, template_name, context)
+# 	template_name = 'website1/form.html'
+# 	context = {"form": form, "errors": errors}
+# 	return render(request, template_name, context)
 
 def Weights(request):
 	template_name = 'weight_list.html'
@@ -48,3 +45,8 @@ class WeightListView(ListView):
 
 class WeightDetailView(DetailView):
 	queryset = Weight.objects.all()
+
+class WeightCreateView(CreateView):
+	form_class = WeightForm
+	template_name = 'website1/form.html'
+	success_url = "/weight/"

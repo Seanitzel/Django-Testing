@@ -1,4 +1,5 @@
 from django import forms
+from .models import Weight
 
 class WeightCreateForm(forms.Form):
 	name = forms.CharField()
@@ -9,3 +10,11 @@ class WeightCreateForm(forms.Form):
 		if name == "hola":
 			raise forms.ValidationError("NOT A NAME!")
 		return name
+
+class WeightForm(forms.ModelForm):
+	class Meta:
+		model = Weight
+		fields = [
+		'name',
+		'weight'
+		]
