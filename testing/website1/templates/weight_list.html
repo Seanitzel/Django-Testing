@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}	Weight List |{{block.super}}	{% endblock %}
+
+{% block test %}
+<h1>Weight List</h1>
+<ul>
+{% for w in object_list %}
+<li> <a href="/weight/{{ w.slug }}">Name: {{w.name}}</a> | Date: {{w.date}} | Weight: {{ w.weight }} | Gym: {{w.gym}}</li>
+{% endfor %}
+</ul>
+{% endblock %}
