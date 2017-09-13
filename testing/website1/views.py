@@ -8,20 +8,6 @@ from .models import Weight
 from .form import WeightCreateForm,WeightForm
 import random
 
-# def Weight_createview(request):		WE DONT NEED THIS ANYMORE
-# 	form = WeightForm(request.POST or None)
-# 	errors = None
-# 	if form.is_valid():
-# 		form.save()
-# 		return HttpResponseRedirect("/weight/")
-
-# 	if form.errors:
-# 		errors = form.errors
-
-# 	template_name = 'website1/form.html'
-# 	context = {"form": form, "errors": errors}
-# 	return render(request, template_name, context)
-
 def Weights(request):
 	template_name = 'weight_list.html'
 	queryset = Weight.objects.all()

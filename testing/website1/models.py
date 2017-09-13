@@ -2,10 +2,11 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 
 from .utils import unique_slug_generator
+from . import validators
 
 class Weight(models.Model):
 	name = models.CharField(max_length = 120, null = True)
-	gym = models.BooleanField(default = False)
+	workout = models.CharField(max_length = 120, null = True, validators = [validators.validate_workout])
 	timestamp = models.DateTimeField(auto_now = False, auto_now_add = False, null = True)
 	weight = models.FloatField(max_length = 5, null = True)
 	slug = models.SlugField(blank = True, null = True)
@@ -18,6 +19,7 @@ class Weight(models.Model):
 		return self.name
 
 def rl_pre_save_reciever(sender, instance, *args, **kwargs):
+	instance.workout = instance.workout.capitalize()
 	if not instance.slug: 
 		instance.slug = unique_slug_generator(instance)
 
