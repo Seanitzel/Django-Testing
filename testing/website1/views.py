@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
 from django.views import View
@@ -32,7 +33,11 @@ class WeightListView(ListView):
 class WeightDetailView(DetailView):
 	queryset = Weight.objects.all()
 
-class WeightCreateView(CreateView):
+class WeightCreateView(LoginRequiredMixin, CreateView):
 	form_class = WeightForm
 	template_name = 'website1/form.html'
-	success_url = "/weight/"
+
+	def form_valid(self, form):
+		instance = form.save(commit = False)
+		instance.Owner = self.request.user
+		return super(WeightCreateView, self).form_valid(form)

@@ -5,7 +5,7 @@
 <h1>Weight List</h1>
 <ul>
 {% for w in object_list %}
-<li> <a href="/weight/{{ w.slug }}">Name: {{w.name}}</a> | Workout: {{w.workout}} | Weight: {{ w.weight }}</li>
+<li> <a href={% url "weight:detail" slug=w.slug %}>Name: {{w.name}}</a> | Workout: {{w.workout}} | Weight: {{ w.weight }}</li>
 {% endfor %}
 </ul>
 {% endblock %}
