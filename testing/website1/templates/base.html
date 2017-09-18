@@ -1,7 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
-	
+	{% block head %}
+   {% load staticfiles %}
+      <link rel="stylesheet" href="{% static '/styles.css' %}" />
+    {% endblock head %}
 	<title> {% block title %}Page{% endblock %}</title>
 
 </head>    

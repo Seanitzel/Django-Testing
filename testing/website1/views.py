@@ -1,38 +1,27 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse,HttpResponseRedirect
 from django.shortcuts import render,get_object_or_404
 from django.views import View
 from django.db.models import Q
 from django.views.generic import TemplateView,ListView,DetailView, CreateView
 
-from .models import Weight
-from .form import WeightCreateForm,WeightForm
+from .models import Person
+from .form import PersonCreateForm,PersonForm
 import random
 
-def Weights(request):
-	template_name = 'weight_list.html'
-	queryset = Weight.objects.all()
-	context = {
-	"object_list": queryset
-	}
-	return render(request, template_name, context)
-
-class WeightListView(ListView):
-	template_name = 'weight_list.html'
+class PersonListView(LoginRequiredMixin, ListView):
+	template_name = 'people_list.html'
 	def get_queryset(self):
-		slug = self.kwargs.get("slug")
-		if slug:
-			queryset = Weight.objects.filter(
-				Q(name__iexact = slug) |
-				Q(name__icontains = slug)
-			)
-		else:
-			queryset = Weight.objects.all()
-		return queryset
+		return Person.objects.filter(Owner = self.request.user)
 
-class WeightDetailView(DetailView):
-	queryset = Weight.objects.all()
+class PersonDetailView(LoginRequiredMixin, DetailView):
+	queryset = Person.objects.all()
 
-class WeightCreateView(CreateView):
-	form_class = WeightForm
+class PersonCreateView(LoginRequiredMixin, CreateView):
+	form_class = PersonForm
 	template_name = 'website1/form.html'
-	success_url = "/weight/"
+
+	def form_valid(self, form):
+		instance = form.save(commit = False)
+		instance.Owner = self.request.user
+		return super(PersonCreateView, self).form_valid(form)

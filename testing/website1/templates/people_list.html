@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}	People List |{{block.super}}	{% endblock %}
+
+{% block test %}
+<h1>Weight List</h1>
+<ol>
+{% for w in object_list %}
+<li> 
+		<ul>	<a href={% url "person:detail" slug=w.slug %}>Name: {{w.name}}</a> 
+		<li>	Workout: {{w.workout}}	</li>
+		<li>	Weight: {{ w.starting_weight }}	</li>
+		<li>	Date: {{ w.timestamp.date }}	</li>
+		<li>	Time: {{ w.timestamp.time }}	</li>
+		</ul>
+</li>	
+{% endfor %}
+</ol>
+{% endblock %}

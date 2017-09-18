@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}	Weight List |{{block.super}}	{% endblock %}
+
+{% block test %}
+<h1>{{ object.name }}</h1>
+
+<h2> {{object.starting_weight}} </h2>
+
+<h2> {{object.workout}} </h2>
+
+<h2> {{object.timestamp.date}} </h2>
+
+<h2> {{object.timestamp.time}} </h2>
+
+{% endblock %}

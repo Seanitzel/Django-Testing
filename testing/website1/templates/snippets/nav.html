@@ -1,7 +1,7 @@
  <div style="color: black">
- <a href="/home/">Home</a>
- <a href="/about">About</a>
- <a href="/contact/">Contact</a>
- <a href="/weight">Weight List</a>
- <a href="/weight/create">Add Weight</a>
+ <a href = {% url 'home' %}>Home</a>
+ <a href = {% url 'about' %}>About</a>
+ <a href = {% url 'contact' %}>Contact</a>
+ <a href = {% url 'person:list' %}>People List</a>
+ <a href = {% url 'person:create' %}>Add Weight</a>
  </div>

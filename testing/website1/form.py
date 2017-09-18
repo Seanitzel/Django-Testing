@@ -1,16 +1,18 @@
 from django import forms
-from .models import Weight
+from .models import Person
+import datetime
 
-class WeightCreateForm(forms.Form):
+class PersonCreateForm(forms.Form):
 	name = forms.CharField()
 	workout = forms.CharField()
-	weight = forms.FloatField()
+	starting_weight = forms.FloatField()
+	date = forms.DateField(initial=datetime.date.today)
 
-class WeightForm(forms.ModelForm):
+class PersonForm(forms.ModelForm):
 	class Meta:
-		model = Weight
+		model = Person
 		fields = [
 		'name',
-		'weight',
-		'workout'
+		'starting_weight',
+		'workout',
 		]

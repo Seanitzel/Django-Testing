@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Weight
+from .models import Person
 
-admin.site.register(Weight)
+admin.site.register(Person)
